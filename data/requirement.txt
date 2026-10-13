@@ -1,0 +1,13 @@
+
+Feature: User Login
+
+The application shall allow registered users to log in
+using their email address and password.
+
+Requirements:
+1. Email and password are mandatory.
+2. A valid email and correct password allow login.
+3. Invalid credentials display an appropriate error message.
+4. After five consecutive failed login attempts, the account
+   must be temporarily locked.
+5. Passwords must never be displayed in plain text.

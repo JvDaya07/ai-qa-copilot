@@ -1,0 +1,19 @@
+
+# Python virtual environment
+.venv/
+venv/
+
+# Secrets
+.env
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Test and coverage artifacts
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Local generated data
+data/processed/
