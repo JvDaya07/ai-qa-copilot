@@ -1,0 +1,122 @@
+{
+  "test_cases": [
+    {
+      "title": "Successful Login with Valid Credentials",
+      "type": "positive",
+      "steps": [
+        "Navigate to the login page",
+        "Enter a registered and active user email",
+        "Enter the correct password for the account",
+        "Click the Login button"
+      ],
+      "expected_result": "The user is successfully authenticated and redirected to the main dashboard.",
+      "priority": "high"
+    },
+    {
+      "title": "Login Fails with Unregistered Email",
+      "type": "negative",
+      "steps": [
+        "Navigate to the login page",
+        "Enter an email address not registered in the system",
+        "Enter any password",
+        "Click the Login button"
+      ],
+      "expected_result": "An appropriate error message indicating invalid credentials is displayed, and the user remains on the login page.",
+      "priority": "medium"
+    },
+    {
+      "title": "Login Fails with Incorrect Password",
+      "type": "negative",
+      "steps": [
+        "Navigate to the login page",
+        "Enter a valid registered user email",
+        "Enter an incorrect password",
+        "Click the Login button"
+      ],
+      "expected_result": "An appropriate error message indicating invalid credentials is displayed, and login is denied.",
+      "priority": "high"
+    },
+    {
+      "title": "Account Temporary Lockout After Five Failed Attempts",
+      "type": "boundary",
+      "steps": [
+        "Navigate to the login page",
+        "Enter a valid registered user email",
+        "Enter an incorrect password and attempt login 5 consecutive times",
+        "Attempt to log in a 6th time using the correct password"
+      ],
+      "expected_result": "After the 5th failed attempt, the account is temporarily locked, preventing login even with the correct password on the 6th attempt.",
+      "priority": "high"
+    },
+    {
+      "title": "Password Field Masks Input Characters",
+      "type": "security",
+      "steps": [
+        "Navigate to the login page",
+        "Focus on the password input field",
+        "Type a password string"
+      ],
+      "expected_result": "All characters entered into the password field are masked (e.g., displayed as dots or asterisks) and never shown in plain text.",
+      "priority": "high"
+    },
+    {
+      "title": "Login Fails When Email Field is Empty",
+      "type": "negative",
+      "steps": [
+        "Navigate to the login page",
+        "Leave the email field blank",
+        "Enter a password",
+        "Click the Login button"
+      ],
+      "expected_result": "Validation prevents submission and displays an error indicating that the email field is mandatory.",
+      "priority": "medium"
+    },
+    {
+      "title": "Login Fails When Password Field is Empty",
+      "type": "negative",
+      "steps": [
+        "Navigate to the login page",
+        "Enter a valid registered user email",
+        "Leave the password field blank",
+        "Click the Login button"
+      ],
+      "expected_result": "Validation prevents submission and displays an error indicating that the password field is mandatory.",
+      "priority": "medium"
+    },
+    {
+      "title": "SQL Injection Attempt in Email Field",
+      "type": "security",
+      "steps": [
+        "Navigate to the login page",
+        "Enter a SQL injection payload in the email field (e.g., 'OR '1'='1)",
+        "Enter any password",
+        "Click the Login button"
+      ],
+      "expected_result": "The input is treated strictly as an email string, authentication fails, and an invalid credentials error is returned without exposing system internals.",
+      "priority": "high"
+    },
+    {
+      "title": "Regression: Successful Login Session Persistence",
+      "type": "regression",
+      "steps": [
+        "Navigate to the login page",
+        "Log in with valid credentials",
+        "Refresh the browser page or navigate to a protected route"
+      ],
+      "expected_result": "The user remains authenticated and does not get redirected back to the login page unexpectedly.",
+      "priority": "medium"
+    },
+    {
+      "title": "Email Field Boundary Length Validation",
+      "type": "boundary",
+      "steps": [
+        "Navigate to the login page",
+        "Enter an email address exceeding standard maximum character length limits",
+        "Enter a valid password",
+        "Click the Login button"
+      ],
+      "expected_result": "System handles the overly long input gracefully by either truncating, rejecting locally, or returning a validation error message.",
+      "priority": "low"
+    }
+  ]
+}
